@@ -1,3 +1,4 @@
+'use client';
 import Link from "next/link";
 import ErrorBanner from "../../components/ErrorBanner";
 import { useRef, useState } from 'react';
