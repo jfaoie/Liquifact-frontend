@@ -76,8 +76,23 @@ GitHub Actions runs on every push and pull request to `main`:
 
 - **Lint** — `npm run lint`
 - **Build** — `npm run build`
+- **Dependency review** — blocks pull requests that introduce high/critical advisories
+- **Secret scan** — gitleaks checks committed changes for leaked credentials
 
-Keep both passing before opening a PR.
+Keep all gates passing before opening a PR.
+
+### Security in CI
+
+Dependency review fails when a pull request introduces high or critical
+advisories. Triage failures by checking whether the advisory affects shipped
+code, updating or replacing the vulnerable package when possible, and linking
+the advisory or follow-up issue in the PR when a fix needs a larger dependency
+upgrade.
+
+The secret scan is intended to catch accidental commits of API keys, private
+tokens, wallet seeds, and other credentials. If gitleaks reports a false positive,
+document why the value is safe to keep and prefer adding a narrowly scoped
+allowlist rule in a follow-up rather than weakening the workflow.
 
 ---
 
